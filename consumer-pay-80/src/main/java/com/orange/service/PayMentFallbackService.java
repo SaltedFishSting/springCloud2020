@@ -1,6 +1,8 @@
 package com.orange.service;
 
 
+import com.orange.model.PayMent;
+import com.orange.model.Result;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -8,12 +10,15 @@ public class PayMentFallbackService implements PayMentFeign {
 
 
     @Override
-    public String paymentGet(Integer id) {
-        return "快速失败1";
+    public Result<PayMent> paymentGet(String id) {
+
+        Result<PayMent> result=new Result<>();
+        result.msg="快速失败1  for8001";
+        return result;
     }
 
     @Override
-    public String paymentInsert(Integer id) {
-        return "快速失败2";
+    public Result<PayMent> paymentInsert(String id) {
+        return null;
     }
 }

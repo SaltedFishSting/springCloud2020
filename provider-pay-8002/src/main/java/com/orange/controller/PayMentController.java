@@ -24,14 +24,10 @@ public class PayMentController {
     @GetMapping("/get/{id}")
     public Result<PayMent> get(@PathVariable String id) {
         System.out.println(id+"来了8002");
-        try {
-            TimeUnit.SECONDS.sleep(5);
-        }catch (Exception e){
 
-        }
         Result<PayMent> result = new Result<>();
         result.code = "0000";
-        result.msg = "ok";
+        result.msg = "ok 来自8002";
         result.data = payMentDao.selectById(id);
         return result;
     }

@@ -10,6 +10,8 @@
         <module name="consumer-pay-80" />
         <module name="eureka-server7001" />
         <module name="eureka-server7002" />
+        <module name="gateway-payMent9527" />
+        <module name="hystrix-dashboard-9001" />
         <module name="provider-pay-8001" />
         <module name="provider-pay-8002" />
         <module name="springCloud-api" />
