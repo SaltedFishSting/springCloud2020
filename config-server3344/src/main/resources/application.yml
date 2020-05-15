@@ -3,15 +3,16 @@ server:
 
 spring:
   application:
-    name:  cloud-config-center #注册进Eureka服务器的微服务名
+    name:  config #注册进Eureka服务器的微服务名
   cloud:
     config:
       server:
         git:
-          uri: git@github.com:SaltedFishSting/springCloud2020.git #GitHub上面的git仓库名字
+          uri: https://github.com/SaltedFishSting/springCloud2020.git #GitHub上面的git仓库名字
           ####搜索目录
-          search-paths:
-          - config2002
+          search-paths: config2002
+          username: 2050422401@qq.com
+          password: wang467132
       ####读取分支
       label: master
 #rabbitmq相关配置
