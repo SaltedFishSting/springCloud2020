@@ -10,7 +10,7 @@ spring:
         git:
           uri: https://github.com/SaltedFishSting/springCloud2020.git #GitHub上面的git仓库名字
           ####搜索目录
-          search-paths: config2002
+          search-paths: config2020
           username: 2050422401@qq.com
           password: wang467132
       ####读取分支
