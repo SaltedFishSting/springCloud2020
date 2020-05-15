@@ -16,6 +16,7 @@
         <module>provider-pay-8002</module>
         <module>hystrix-dashboard-9001</module>
         <module>gateway-payMent9527</module>
+        <module>config-server3344</module>
     </modules>
     <packaging>pom</packaging>
 
