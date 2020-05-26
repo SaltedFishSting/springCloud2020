@@ -2,8 +2,33 @@ server:
   port: 80
 
 spring:
+#  rocketmq:
+#    nameServer: 127.0.0.1:9876
+#    producer:
+#      group: orange_producer_group
   application:
     name: cloud-order-service
+  cloud:
+    stream:
+      binders: # 在此处配置要绑定的rabbitmq的服务信息；
+        local_rabbit: # 表示定义的名称，用于于binding整合
+          type: rabbit # 消息组件类型
+          environment: # 设置rabbitmq的相关的环境配置
+            spring:
+              rabbitmq:
+                host: localhost
+                port: 5672
+                username: guest
+                password: guest
+      bindings: # 服务的整合处理
+        log_output:
+          destination: kite.log.messages
+          binder: local_rabbit
+          group: logConsumer-group1
+#        output: # 这个名字是一个通道的名称
+#          destination: studyExchange # 表示要使用的Exchange名称定义
+#          content-type: application/json # 设置消息类型，本次为json，文本则设置“text/plain”
+#          binder: defaultRabbit # 设置要绑定的消息服务的具体设置
 #  zipkin:
 #    base-url: http://localhost:9411
 #  sleuth:
@@ -39,16 +64,21 @@ hystrix:
             timeoutInMilliseconds: 5000
 
 CLOUD-PAYMENT-SERVICE:
- ribbon:
-  #NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule #配置规则 随机
-  #NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule #配置规则 轮询
-  #NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RetryRule #配置规则 重试
-  #NFLoadBalancerRuleClassName: com.netflix.loadbalancer.WeightedResponseTimeRule #配置规则 响应时间权重
-  NFLoadBalancerRuleClassName: com.netflix.loadbalancer.BestAvailableRule #配置规则 最空闲连接策略
-  ConnectTimeout: 500 #请求连接超时时间
-  ReadTimeout: 1000 #请求处理的超时时间
-  OkToRetryOnAllOperations: true #对所有请求都进行重试
-  MaxAutoRetriesNextServer: 1 #切换实例的重试次数
-  MaxAutoRetries: 1 #对当前实例的重试次数
+  ribbon:
+    #NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule #配置规则 随机
+    #NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule #配置规则 轮询
+    #NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RetryRule #配置规则 重试
+    #NFLoadBalancerRuleClassName: com.netflix.loadbalancer.WeightedResponseTimeRule #配置规则 响应时间权重
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.BestAvailableRule #配置规则 最空闲连接策略
+    ConnectTimeout: 500 #请求连接超时时间
+    ReadTimeout: 1000 #请求处理的超时时间
+    OkToRetryOnAllOperations: true #对所有请求都进行重试
+    MaxAutoRetriesNextServer: 1 #切换实例的重试次数
+    MaxAutoRetries: 1 #对当前实例的重试次数
+
+rocketmq:
+  producer:
+    group: orange-group
+  name-server: 127.0.0.1:9876
 
 

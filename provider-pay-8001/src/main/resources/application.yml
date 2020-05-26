@@ -2,8 +2,38 @@ server:
   port: 8001
 
 spring:
+
   application:
     name: cloud-payment-service
+  cloud:
+    stream:
+      binders: # 在此处配置要绑定的rabbitmq的服务信息；
+        local_rabbit: # 表示定义的名称，用于于binding整合
+          type: rabbit # 消息组件类型
+          environment: # 设置rabbitmq的相关的环境配置
+            spring:
+              rabbitmq:
+                host: localhost
+                port: 5672
+                username: guest
+                password: guest
+      bindings: # 服务的整合处理
+        log_input:
+          destination: kite.log.messages
+          binder: local_rabbit
+          group: logConsumer-group1
+        log_output:
+            destination: kite.log.messages
+            binder: local_rabbit
+            group: logConsumer-group1
+        log_format_input:
+            destination: kite.log.format.messages
+            binder: local_rabbit
+            group: logFormat-group1
+        log_format_output:
+            destination: kite.log.format.messages
+            binder: local_rabbit
+            group: logFormat-group1
 #  zipkin:
 #    base-url: http://localhost:9411
 #  sleuth:
@@ -53,3 +83,5 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 5000
+rocketmq:
+  name-server: 127.0.0.1:9876

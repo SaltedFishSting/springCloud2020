@@ -7,6 +7,8 @@ import com.orange.dao.PayMentDao;
 import com.orange.model.PayMent;
 import com.orange.model.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +19,7 @@ import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/payMent")
+@RefreshScope
 public class PayMentController {
 
     @Autowired
@@ -61,5 +64,7 @@ public class PayMentController {
         result.msg = "ok";
         return result;
     }
+
+
 
 }
